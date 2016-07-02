@@ -1,0 +1,6 @@
+Credits
+===============
+
+Originally developed by - Jmorris, Marco, Christian, DuGris (http://www.dugris.info)
+
+Version 2.15 was updated to XOOPS 2.5.8 Standard GUI by Michael Beck (Mamba)

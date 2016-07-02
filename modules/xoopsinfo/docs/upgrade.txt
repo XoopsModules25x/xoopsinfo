@@ -1,10 +1,5 @@
-/**
-*
 * Xoopsinfo : UPGRADE INSTRUCTIONS
-* 
-*/
-
-
+=====================================
 
 Here is the list of actions you will have to do to upgrade from any previous version :
 

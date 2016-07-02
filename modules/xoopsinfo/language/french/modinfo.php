@@ -1,103 +1,100 @@
 <?php
 /**
-* XOOPS - PHP Content Management System
-* Copyright (c) 2001 - 2006 <http://www.xoops.org/>
-*
-* Module: xoopsinfo 2.0
-* Licence : GPL
-* Authors :
-*              - Jmorris
-*              - Marco
-*              - Christian
-*              - DuGris (http://www.dugris.info)
-*/
-
+ * XOOPS - PHP Content Management System
+ * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
+ *
+ * Module: xoopsinfo 2.0
+ * Licence : GPL
+ * Authors :
+ *              - Jmorris
+ *              - Marco
+ *              - Christian
+ *              - DuGris (http://www.dugris.info)
+ */
 
 // The name of this module
-define("_MI_XI_NAME","XOOPS Info");
+define('_MI_XI_NAME', 'XOOPS Info');
 
 // A brief description of this module
-define("_MI_XI_DESC","Module basique permettant d'afficher les informations sur les versions XOOPS, Apache, MySQL, et PHP.");
+define('_MI_XI_DESC', "Module basique permettant d'afficher les informations sur les versions XOOPS, Apache, MySQL, et PHP.");
 
 // Credit where credit is due
-define("_MI_XI_AUTHOR","XOOPS Support Team - DuGris (XOOPS France)");
-define("_MI_XI_CREDITS","XOOPS Core Team (http://www.xoops.org/) - DuGris (http://www.dugris.info/");
+define('_MI_XI_AUTHOR', 'XOOPS Support Team - DuGris (XOOPS France)');
+define('_MI_XI_CREDITS', 'XOOPS Core Team (http://www.xoops.org/) - DuGris (http://www.dugris.info/');
 
 // Support
-define("_MI_XI_SUPPORT","Poster vos demandes de support sur http://frxoops.org/");
+define('_MI_XI_SUPPORT', 'Poster vos demandes de support sur http://frxoops.org/');
 
 // Names of admin menu items
-define("_MI_XI_ADMENU1","Env Xoops");
-define("_MI_XI_ADMENU2","Env Serveur");
-define("_MI_XI_ADMENU3","Env MySql");
-define("_MI_XI_ADMENU4","Information Modules");
-define("_MI_XI_ADMENU5","Information Editeurs");
-define("_MI_XI_ADMENU6","Information Surcharge");
-define("_MI_XI_ADMENU7","Types mime");
+define('_MI_XI_ADMENU1', 'Env Xoops');
+define('_MI_XI_ADMENU2', 'Env Serveur');
+define('_MI_XI_ADMENU3', 'Env MySql');
+define('_MI_XI_ADMENU4', 'Information Modules');
+define('_MI_XI_ADMENU5', 'Information Editeurs');
+define('_MI_XI_ADMENU6', 'Information Surcharge');
+define('_MI_XI_ADMENU7', 'Types mime');
 
-define("_MI_XI_XOOPS_DEBUG","Mode de mise au point (Debug)");
-define("_MI_XI_XOOPS_THEME","Activer le thème par default");
-define("_MI_XI_XOOPS_CACHE","Supprimer les fichiers du dossier cache");
-define("_MI_XI_XOOPS_TEMPLATE","Supprimer les fichiers du dossier template_c");
-define("_MI_XI_XOOPS_PROTECTOR","<font color='#CC0000'>Protector : </font>Désactivation Temporaire");
-define("_MI_XI_XOOPS_PROTECTOR_IP","<font color='#CC0000'>Protector : </font>Supprimer les IP bannies");
+define('_MI_XI_XOOPS_DEBUG', 'Mode de mise au point (Debug)');
+define('_MI_XI_XOOPS_THEME', 'Activer le thï¿½me par default');
+define('_MI_XI_XOOPS_CACHE', 'Supprimer les fichiers du dossier cache');
+define('_MI_XI_XOOPS_TEMPLATE', 'Supprimer les fichiers du dossier template_c');
+define('_MI_XI_XOOPS_PROTECTOR', "<font color='#CC0000'>Protector : </font>Dï¿½sactivation Temporaire");
+define('_MI_XI_XOOPS_PROTECTOR_IP', "<font color='#CC0000'>Protector : </font>Supprimer les IP bannies");
 
-define("_MI_XI_XOOPS_PASSWORD","Mot de passe");
-define("_MI_XI_PASSWORD_ERROR","Mot de passe erroné !!!");
-define("_MI_XI_XOOPS_SUBMIT","Envoyer");
-define("_MI_XI_YES","Oui");
-define("_MI_XI_NO","Non");
+define('_MI_XI_XOOPS_PASSWORD', 'Mot de passe');
+define('_MI_XI_PASSWORD_ERROR', 'Mot de passe erronï¿½ !!!');
+define('_MI_XI_XOOPS_SUBMIT', 'Envoyer');
+define('_MI_XI_YES', 'Oui');
+define('_MI_XI_NO', 'Non');
 
-define("_MI_XI_UPDATE_MODULE","<font color='#CC0000'>Mise à jour du module</font>");
-define("_MI_XI_NEWVERSION","<font color='#000099'>Nouvelle version</font>");
-define("_MI_XI_HELP","Aide");
+define('_MI_XI_UPDATE_MODULE', "<font color='#CC0000'>Mise ï¿½ jour du module</font>");
+define('_MI_XI_NEWVERSION', "<font color='#000099'>Nouvelle version</font>");
+define('_MI_XI_HELP', 'Aide');
 
-define("_AM_XI_MODULE_LEGEND_UPDATE", "La mise à jour du module n'a pas été effectuée !!!");
-define("_AM_XI_MODULE_LEGEND_DOWNLOAD","Une nouvelle version du module est disponible en téléchargement");
+define('_AM_XI_MODULE_LEGEND_UPDATE', "La mise ï¿½ jour du module n'a pas ï¿½tï¿½ effectuï¿½e !!!");
+define('_AM_XI_MODULE_LEGEND_DOWNLOAD', 'Une nouvelle version du module est disponible en tï¿½lï¿½chargement');
 
 // Options
-define("_MI_XI_CHECK_TABLE","Tables à controler");
-define("_MI_XI_CHECK_TABLE_DSC","Séparer le nom des tables par <font color='#CC0000'><b>|</b></font>");
+define('_MI_XI_CHECK_TABLE', 'Tables ï¿½ controler');
+define('_MI_XI_CHECK_TABLE_DSC', "Sï¿½parer le nom des tables par <font color='#CC0000'><b>|</b></font>");
 
-define("_MI_XI_IMG_FONT","Taille des caractères");
-define("_MI_XI_IMG_BACKGROUND","Couleur de fond");
-define("_MI_XI_IMG_BORDER","Couleur du contour");
-define("_MI_XI_IMG_CONSTANT","Couleur du texte");
-define("_MI_XI_IMG_DATA","Couleur des informations");
+define('_MI_XI_IMG_FONT', 'Taille des caractï¿½res');
+define('_MI_XI_IMG_BACKGROUND', 'Couleur de fond');
+define('_MI_XI_IMG_BORDER', 'Couleur du contour');
+define('_MI_XI_IMG_CONSTANT', 'Couleur du texte');
+define('_MI_XI_IMG_DATA', 'Couleur des informations');
 
-define("_MI_XI_PASSWORD","Mot de passe");
-define("_MI_XI_PASSWORD_DSC", "Si pour une raison ou une autre vous n'avez plus acces à votre site.<br />
- Accéder au sript :
- <a href='" . XOOPS_URL . "/modules/xoopsinfo/admin/rescue.php'><font color='#CC0000'><b>XOOPS_URL/modules/xoopsinfo/admin/rescue.php</b></font></a><br />
+define('_MI_XI_PASSWORD', 'Mot de passe');
+define('_MI_XI_PASSWORD_DSC', "Si pour une raison ou une autre vous n'avez plus acces ï¿½ votre site.<br>
+ Accï¿½der au sript :
+ <a href='" . XOOPS_URL . "/modules/xoopsinfo/admin/rescue.php'><font color='#CC0000'><b>XOOPS_URL/modules/xoopsinfo/admin/rescue.php</b></font></a><br>
  <li>Choisir le mode debug</li>
- <li>Activer le thème par défaut</li><br />
- <li>Entrez le mot de passe défini ici.</li><br />
- N'oubliez pas de définir un mot de passe<br />
- Si cette option n'est pas renseignée, le script ne fonctionnera jamais !!!
+ <li>Activer le thï¿½me par dï¿½faut</li><br>
+ <li>Entrez le mot de passe dï¿½fini ici.</li><br>
+ N'oubliez pas de dï¿½finir un mot de passe<br>
+ Si cette option n'est pas renseignï¿½e, le script ne fonctionnera jamais !!!
  ");
 
-
 // Version 2.12
-define("_MI_XI_REFERER", "Referers autorisés pour <font color='#CC0000'>xoopsinfo.php</font>");
-define("_MI_XI_REFERER_DSC", "séparé par <font color='#CC0000'><b>|</b></font>");
+define('_MI_XI_REFERER', "Referers autorisï¿½s pour <font color='#CC0000'>xoopsinfo.php</font>");
+define('_MI_XI_REFERER_DSC', "sï¿½parï¿½ par <font color='#CC0000'><b>|</b></font>");
 
-define("_MI_XI_ADMENU8","Information système");
+define('_MI_XI_ADMENU8', 'Information systï¿½me');
 
-define("_MI_PHPSYSINFO_FOLDER","[PHPSYSINFO] Dossier contenant <font color='#CC0000'>PHPSYSINFO</font>");
-define("_MI_PHPSYSINFO_FOLDER_DSC","par exemple <font color='#CC0000'><b>/phpsysinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br />Plus d'informations sur <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
+define('_MI_PHPSYSINFO_FOLDER', "[PHPSYSINFO] Dossier contenant <font color='#CC0000'>PHPSYSINFO</font>");
+define('_MI_PHPSYSINFO_FOLDER_DSC', "par exemple <font color='#CC0000'><b>/phpsysinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
 
-define("_MI_PHPSYSINFO_LANG","[PHPSYSINFO] Langue par défaut");
-define("_MI_PHPSYSINFO_LANG_DSC","La liste des langues est disponibles dans le dossier includes/lang/ de phpsysinfo");
-define("_MI_PHPSYSINFO_LANG_DEF","fr");
+define('_MI_PHPSYSINFO_LANG', '[PHPSYSINFO] Langue par dï¿½faut');
+define('_MI_PHPSYSINFO_LANG_DSC', 'La liste des langues est disponibles dans le dossier includes/lang/ de phpsysinfo');
+define('_MI_PHPSYSINFO_LANG_DEF', 'fr');
 
-define("_MI_PHPSYSINFO_THEME","[PHPSYSINFO] Thème par défaut");
-define("_MI_PHPSYSINFO_THEME_DSC","La listes des thèmes est disponible dans le dossier templates de phpsysinfo");
+define('_MI_PHPSYSINFO_THEME', '[PHPSYSINFO] Thï¿½me par dï¿½faut');
+define('_MI_PHPSYSINFO_THEME_DSC', 'La listes des thï¿½mes est disponible dans le dossier templates de phpsysinfo');
 
-define("_MI_XI_XOOPS_SESSION_TABLE", "Optimiser la table session");
+define('_MI_XI_XOOPS_SESSION_TABLE', 'Optimiser la table session');
 
- // Version 2.13
-define("_MI_XI_ADMENU9","PHP Information de sécurité");
+// Version 2.13
+define('_MI_XI_ADMENU9', 'PHP Information de sï¿½curitï¿½');
 
-define("_MI_PHPSECINFO_FOLDER","[PHPSECINFO] Dossier contenant <font color='#CC0000'>PHPSECINFO</font>");
-define("_MI_PHPSECINFO_FOLDER_DSC","par exemple <font color='#CC0000'><b>/phpsecinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br />Plus d'informations sur <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");
-?>
+define('_MI_PHPSECINFO_FOLDER', "[PHPSECINFO] Dossier contenant <font color='#CC0000'>PHPSECINFO</font>");
+define('_MI_PHPSECINFO_FOLDER_DSC', "par exemple <font color='#CC0000'><b>/phpsecinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");
