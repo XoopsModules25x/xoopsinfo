@@ -21,7 +21,7 @@ include('admin_header.php');
 switch ($op) {
     case 'save':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $config_handler =& xoops_getHandler('config');
+            $config_handler = xoops_getHandler('config');
             foreach ($conf_ids as $key => $conf_id) {
                 $config    = $config_handler->getConfig($conf_id, true);
                 $new_value = $_REQUEST[$config->getVar('conf_name')];
@@ -30,7 +30,7 @@ switch ($op) {
                     $config_handler->insertConfig($config);
 
                     if ($config->getVar('conf_name') === 'theme_set') {
-                        $member_handler =& xoops_getHandler('member');
+                        $member_handler = xoops_getHandler('member');
                         $member_handler->updateUsersByField('theme', $new_value);
                         $_SESSION['xoopsUserTheme'] = $new_value;
                     }
@@ -148,13 +148,13 @@ $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name =
 $res = $xoopsDB->query($sql);
 list($conf_id) = $xoopsDB->fetchRow($res);
 
-$config_handler   =& xoops_getHandler('config');
+$config_handler   = xoops_getHandler('config');
 $config_startpage = $config_handler->getConfig($conf_id, true);
 
 $title          = (!defined($config_startpage->getVar('conf_desc')) || constant($config_startpage->getVar('conf_desc')) == '') ? constant($config_startpage->getVar('conf_title')) : constant($config_startpage->getVar('conf_title')) . '<br><br><span style="font-weight:normal;">'
                                                                                                                                                                                      . constant($config_startpage->getVar('conf_desc')) . '</span>';
 $startpage_ele  = new XoopsFormSelect($title, $config_startpage->getVar('conf_name'), $config_startpage->getConfValueForOutput());
-$module_handler =& xoops_getHandler('module');
+$module_handler = xoops_getHandler('module');
 $criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
 $criteria->add(new Criteria('isactive', 1));
 $moduleslist       = $module_handler->getList($criteria, true);
@@ -170,7 +170,7 @@ $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name =
 $res = $xoopsDB->query($sql);
 list($conf_id) = $xoopsDB->fetchRow($res);
 
-$config_handler =& xoops_getHandler('config');
+$config_handler = xoops_getHandler('config');
 $config_theme   = $config_handler->getConfig($conf_id, true);
 
 $title     =
@@ -192,7 +192,7 @@ $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name =
 $res = $xoopsDB->query($sql);
 list($conf_id) = $xoopsDB->fetchRow($res);
 
-$config_handler        =& xoops_getHandler('config');
+$config_handler        = xoops_getHandler('config');
 $config_theme_fromfile = $config_handler->getConfig($conf_id, true);
 
 $theme_fromfile_ele = new XoopsFormRadioYN($title, $config_theme_fromfile->getVar('conf_name'), $config_theme_fromfile->getConfValueForOutput(), _YES, _NO);
@@ -206,13 +206,13 @@ $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name =
 $res = $xoopsDB->query($sql);
 list($conf_id) = $xoopsDB->fetchRow($res);
 
-$config_handler =& xoops_getHandler('config');
+$config_handler = xoops_getHandler('config');
 $config_tplset  = $config_handler->getConfig($conf_id, true);
 
 $title          = (!defined($config_tplset->getVar('conf_desc')) || constant($config_tplset->getVar('conf_desc')) == '') ? constant($config_tplset->getVar('conf_title')) : constant($config_tplset->getVar('conf_title')) . '<br><br><span style="font-weight:normal;">'
                                                                                                                                                                             . constant($config_tplset->getVar('conf_desc')) . '</span>';
 $tplset_ele     = new XoopsFormSelect($title, $config_tplset->getVar('conf_name'), $config_tplset->getConfValueForOutput());
-$tplset_handler =& xoops_getHandler('tplset');
+$tplset_handler = xoops_getHandler('tplset');
 $tplsetlist     = $tplset_handler->getList();
 asort($tplsetlist);
 foreach ($tplsetlist as $key => $name) {
@@ -228,7 +228,7 @@ $sql = 'SELECT conf_id FROM ' . $xoopsDB->prefix('config') . ' WHERE conf_name =
 $res = $xoopsDB->query($sql);
 list($conf_id) = $xoopsDB->fetchRow($res);
 
-$config_handler =& xoops_getHandler('config');
+$config_handler = xoops_getHandler('config');
 $config_debug   = $config_handler->getConfig($conf_id, true);
 
 $title =
@@ -258,7 +258,7 @@ if ($isProtector) {
     $res = $xoopsDB->query($sql);
     list($conf_id) = $xoopsDB->fetchRow($res);
 
-    $config_handler   =& xoops_getHandler('config');
+    $config_handler   = xoops_getHandler('config');
     $config_protector = $config_handler->getConfig($conf_id, true);
 
     $protector_ele    = new XoopsFormRadioYN($title, $config_protector->getVar('conf_name'), $config_protector->getConfValueForOutput(), _YES, _NO);

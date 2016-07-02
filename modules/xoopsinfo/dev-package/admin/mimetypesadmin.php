@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$create) {
         $mperm_maxsize   = isset($_REQUEST['mperm_maxsize']) ? (int)$_REQUEST['mperm_maxsize'] : 0;
         $result          = true;
 
-        $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+        $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
         if ($mperm_id != 0) {
             $mimeObj = new XoopsMimetypes_perms($mperm_id);
             if ($mperm_mime == $mimeObj->mperm_mime()) {
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$create) {
     }
 
     if ($op === 'saveall') {
-        $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+        $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
         $mperm_ids         = $_REQUEST['mperm_id'] ? $_REQUEST['mperm_id'] : array();
         foreach ($mperm_ids as $mperm_id => $value) {
             $mperm_mime      = $_REQUEST['mperm_mime'][$mperm_id];
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$create) {
     }
 
     if ($op === 'dele' && $confirm) {
-        $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+        $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
         $mimeObj           = new XoopsMimetypes_perms($mperm_id);
         if (!$mimetypes_Handler->deletebyMime($mimeObj, true)) {
             redirect_header('mimetypes.php?' . $uri, 3, $mimetypes_Handler->getHtmlErrors());
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$create) {
 
 switch ($op) {
     case 'hide':
-        $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+        $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
         $mimeObjs          = $mimetypes_Handler->get_byMimeModule($mime_id, $mid);
         foreach ($mimeObjs as $mimeObj) {
             $mimeObj->setVar('mperm_status', 0);
@@ -175,7 +175,7 @@ switch ($op) {
         break;
 
     case 'view':
-        $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+        $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
         $mimeObjs          = $mimetypes_Handler->get_byMimeModule($mime_id, $mid);
         foreach ($mimeObjs as $mimeObj) {
             $mimeObj->setVar('mperm_status', 1);

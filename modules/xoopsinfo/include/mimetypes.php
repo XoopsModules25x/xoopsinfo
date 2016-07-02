@@ -23,7 +23,7 @@ function TypesMime_GetModulesList()
 {
     global $mid;
 
-    $module_handler =& xoops_getHandler('module');
+    $module_handler = xoops_getHandler('module');
     $criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
     $criteria->add(new Criteria('isactive', 1));
     $criteria->add(new Criteria('mid', 1), 'OR');
@@ -48,7 +48,7 @@ function GetTypeList()
 {
     global $mid, $status, $type;
 
-    $mimetypes_Handler =& xoops_getHandler('mimetypes');
+    $mimetypes_Handler = xoops_getHandler('mimetypes');
     $list_types        = $mimetypes_Handler->Get_TypeList();
     $list_types[-1]    = _AM_XI_MIME_ALL;
     ksort($list_types);
@@ -66,7 +66,7 @@ function GetTypeList()
 function list_mimetypes()
 {
     global $uri, $status, $mid, $start, $type;
-    $mimetypes_Handler =& xoops_getHandler('mimetypes');
+    $mimetypes_Handler = xoops_getHandler('mimetypes');
     if ($type != -1) {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('mime_types', '%' . $type . '%', 'LIKE'));
@@ -208,7 +208,7 @@ function edit_mimetypes()
 function list_mimetypes_perms()
 {
     global $xoopsModule, $uri, $status, $mid, $start, $type;
-    $mimetypes_Handler =& xoops_getHandler('mimetypes_perms');
+    $mimetypes_Handler = xoops_getHandler('mimetypes_perms');
     if ($type != -1) {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('mime_types', '%' . $type . '%', 'LIKE'));
@@ -331,14 +331,14 @@ function edit_mimetypes_modules()
     global $status, $mid, $start;
     $mime_id      = isset($_REQUEST['mime_id']) ? (int)$_REQUEST['mime_id'] : 0;
     $mime         = new XoopsMimetypes_perms($mime_id);
-    $mime_Handler =& xoops_getHandler('mimetypes_perms');
+    $mime_Handler = xoops_getHandler('mimetypes_perms');
 
     admintitle(_AM_XI_MIME_MODULES . ' <font color="#CC0000">' . $mime_Handler->mime_module($mid) . '</font>');
 
     $forminfo = ($mime_id == 0) ? _AM_XI_MIME_CREATE : _AM_XI_MIME_MODIFY;
     $sform    = new XoopsThemeForm($forminfo, 'mimetype', 'mimetypes.php?');
 
-    $mimetypes_Handler =& xoops_getHandler('mimetypes');
+    $mimetypes_Handler = xoops_getHandler('mimetypes');
     $sform->addElement($mimetypes_Handler->XoopsFormSelectMime(_AM_XI_MIME_NAME, 'mperm_mime', $mime->getVar('mperm_mime')));
 
     $groups = $mime->GetGroups() ? $mime->GetGroups() : array(XOOPS_GROUP_ADMIN);
@@ -391,7 +391,7 @@ function edit_mimetypes_modules()
 function install_MimeTypes($dirname = '')
 {
     include_once(XOOPS_ROOT_PATH . '/kernel/mimetypes.php');
-    $hModule = &xoops_getHandler('module');
+    $hModule = xoops_getHandler('module');
 
     if ($ModuleInfo = $hModule->getByDirname($dirname)) {
         if (($hModule->getByDirName('xoopsinfo') && substr(XOOPS_VERSION, 6, 3) == '2.0' && substr(XOOPS_VERSION, 10, 2) < 16)
@@ -401,8 +401,8 @@ function install_MimeTypes($dirname = '')
             $mimeTypes = $ModuleInfo->getInfo('mimetypes');
             if ($mimeTypes != false) {
                 $mymsgs[]          = 'Adding module mimetypes data...';
-                $mime_handler      =& xoops_getHandler('mimetypes');
-                $mimeperms_handler =& xoops_getHandler('mimetypes_perms');
+                $mime_handler      = xoops_getHandler('mimetypes');
+                $mimeperms_handler = xoops_getHandler('mimetypes_perms');
                 $mime_id           = 0;
                 foreach ($mimeTypes as $key => $mimeType) {
                     $mimetypeObj = $mime_handler->get_byExt($mimeType['mime_ext']);
@@ -459,7 +459,7 @@ function install_MimeTypes($dirname = '')
 function uninstall_MimeTypes($dirname = '')
 {
     include_once(XOOPS_ROOT_PATH . '/kernel/mimetypes.php');
-    $hModule = &xoops_getHandler('module');
+    $hModule = xoops_getHandler('module');
 
     if ($ModuleInfo = $hModule->getByDirname($dirname)) {
         if (($hModule->getByDirName('xoopsinfo') && substr(XOOPS_VERSION, 6, 3) == '2.0' && substr(XOOPS_VERSION, 10, 2) < 16)
@@ -469,8 +469,8 @@ function uninstall_MimeTypes($dirname = '')
             $mimeTypes = $ModuleInfo->getInfo('mimetypes');
             if ($mimeTypes != false) {
                 $msgs[]            = 'Deleting Mime Types permission...';
-                $mime_handler      =& xoops_getHandler('mimetypes');
-                $mimeperms_handler =& xoops_getHandler('mimetypes_perms');
+                $mime_handler      = xoops_getHandler('mimetypes');
+                $mimeperms_handler = xoops_getHandler('mimetypes_perms');
                 $mime_id           = 0;
                 foreach ($mimeTypes as $key => $mimeType) {
                     $mimetypeObj = new xoopsmimetypes();
