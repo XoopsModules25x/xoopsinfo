@@ -184,7 +184,7 @@ class PhpSecInfo
 	 *
 	 * @return PhpSecInfo
 	 */
-	function PhpSecInfo($opts = null) {
+	function __construct($opts = null) {
 		
 		$this->_base_dir = dirname(__FILE__);
 		
