@@ -9,7 +9,7 @@
 /**
  * require the main PhpSecInfo class
  */
-require_once('PhpSecInfo/Test/Test.php');
+require_once(PHPSECINFO_BASE_DIR.'/Test/Test.php');
 
 
 
@@ -38,12 +38,12 @@ class PhpSecInfo_Test_Cgi extends PhpSecInfo_Test
 	 * @return boolean
 	 */
 	function isTestable() {
-		/*if ( preg_match('/^cgi.*$/', php_sapi_name()) ) {
+		/*if ( preg_match('/^cgi.*$/', PHP_SAPI) ) {
 			return true;
 		} else {
 			return false;
 		}*/
-		return strpos(php_sapi_name(), 'cgi') === 0;
+		return !strncmp(PHP_SAPI, 'cgi', 3);
 	}
 
 

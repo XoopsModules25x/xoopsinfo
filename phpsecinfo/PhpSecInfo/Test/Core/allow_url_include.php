@@ -10,7 +10,7 @@
 /**
  * require the PhpSecInfo_Test_Core class
  */
-require_once('PhpSecInfo/Test/Test_Core.php');
+require_once(PHPSECINFO_BASE_DIR.'/Test/Test_Core.php');
 
 /**
  * Test Class for allow_url_include
@@ -56,12 +56,7 @@ class PhpSecInfo_Test_Core_Allow_Url_Include extends PhpSecInfo_Test_Core
 	 * @return boolean
 	 */
 	function isTestable() {
-
-		if ( version_compare(PHP_VERSION, '5.2', '<') ) {
-			return false;
-		} else {
-			return true;
-		}
+		return version_compare(PHP_VERSION, '5.2', '>=');
 	}
 
 
