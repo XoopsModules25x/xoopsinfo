@@ -1,12 +1,5 @@
-<?php
-/* This is an example page calling the phpsecinfo() function */
-if ( empty($_SERVER['HTTP_REFERER']) && !strstr($_SERVER['HTTP_REFERER'], 'xoopsinfo') && !isset($GLOBALS['_GET']['xoopsinfo']) ) {
-	header("Location: http://" . $_SERVER['HTTP_HOST']);
-} else {
-	require_once('PhpSecInfo/PhpSecInfo.php');
-	phpsecinfo();
-}
-?>
+<?php require_once('PhpSecInfo/PhpSecInfo.php'); ?>
+<?php phpsecinfo(); ?>
 
 <?php
 /**

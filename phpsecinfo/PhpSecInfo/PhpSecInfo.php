@@ -17,13 +17,13 @@ define ('PHPSECINFO_LANG_DEFAULT', 'en');
  * a general version string to differentiate releases
  *
  */
-define ('PHPSECINFO_VERSION', '0.2.1');
+define ('PHPSECINFO_VERSION', '0.2.2');
 
 /**
  * a YYYYMMDD date string to indicate "build" date
  *
  */
-define ('PHPSECINFO_BUILD', '20070406');
+define ('PHPSECINFO_BUILD', '20080723');
 
 /**
  * Homepage for phpsecinfo project
@@ -32,13 +32,31 @@ define ('PHPSECINFO_BUILD', '20070406');
 define ('PHPSECINFO_URL', 'http://phpsecinfo.com');
 
 /**
+ * The base folder where views are stored.  Include trailing slash
+ *
+ */
+define('PHPSECINFO_VIEW_DIR_DEFAULT', 'View/');
+
+
+/**
+ * The default format, used to load the proper view.
+ */
+define('PHPSECINFO_FORMAT_DEFAULT', 'Html');
+
+
+/**
+ * The base directory, used to resolve requires and includes
+ */
+define('PHPSECINFO_BASE_DIR', dirname(__FILE__));
+
+/**
  * This is the main class for the phpsecinfo system.  It's responsible for
  * dynamically loading tests, running those tests, and generating the results
  * output
  *
  * Example:
  * <code>
- * <?php require_once('PhpSecInfo/PhpSecInfo.php'); ?>
+ * <?php require_once(PHPSECINFO_BASE_DIR.'/PhpSecInfo.php'); ?>
  * <?php phpsecinfo(); ?>
  * </code>
  *
@@ -47,7 +65,7 @@ define ('PHPSECINFO_URL', 'http://phpsecinfo.com');
  *
  * Example:
  * <code>
- * require_once('PhpSecInfo/PhpSecInfo.php');
+ * require_once(PHPSECINFO_BASE_DIR.'/PhpSecInfo.php');
  * // instantiate the class
  * $psi = new PhpSecInfo();
  *
@@ -83,6 +101,7 @@ class PhpSecInfo
 	 * @var array PhpSecInfo_Test
 	 */
 	var $tests_to_run = array();
+
 
 	/**
 	 * An array of results.  Each result is an associative array:
@@ -137,12 +156,63 @@ class PhpSecInfo
 
 
 	/**
+	 * The base directory for phpsecinfo. Set within the constructor. Paths are resolved from this.
+	 * @var string
+	 */
+	var $_base_dir;
+
+
+	/**
+	 * The directory PHPSecInfo will look for views.  It defaults to the value
+	 * in PHPSECINFO_VIEW_DIR_DEFAULT, but can be changed with the setViewDirectory()
+	 * method.
+	 *
+	 * @var string
+	 */
+	var $_view_directory;
+
+
+	/**
+	 * The output format, used to load the proper view
+	 *
+	 * @var string
+	 **/
+	var $_format;
+
+	/**
 	 * Constructor
 	 *
 	 * @return PhpSecInfo
 	 */
-	function PhpSecInfo() {
-
+	function PhpSecInfo($opts = null) {
+		
+		$this->_base_dir = dirname(__FILE__);
+		
+		if ($opts) {
+			if (isset($opts['view_directory'])) {
+				$this->setViewDirectory($opts['view_directory']);
+			} else {
+				$this->setViewDirectory(dirname(__FILE__).DIRECTORY_SEPARATOR . PHPSECINFO_VIEW_DIR_DEFAULT);
+			}
+			
+			if (isset($opts['format'])) {
+				$this->setFormat($opts['format']);
+			} else {
+				if (!strcasecmp(PHP_SAPI, 'cli')) {
+					$this->setFormat('Cli');
+				} else {
+					$this->setFormat(PHPSECINFO_FORMAT_DEFAULT);
+				}
+			}
+			
+		} else { /* Use defaults */
+			$this->setViewDirectory(dirname(__FILE__).DIRECTORY_SEPARATOR . PHPSECINFO_VIEW_DIR_DEFAULT);
+			if (!strcasecmp(PHP_SAPI, 'cli')) {
+				$this->setFormat('Cli');
+			} else {
+				$this->setFormat(PHPSECINFO_FORMAT_DEFAULT);
+			}
+		}
 	}
 
 
@@ -158,7 +228,7 @@ class PhpSecInfo
 		//echo "<pre>"; echo print_r($test_root, true); echo "</pre>";
 
 		while (false !== ($entry = $test_root->read())) {
-			if ( is_dir($test_root->path.DIRECTORY_SEPARATOR.$entry) && !preg_match('|^\.(.*)$|', $entry) ) {
+			if ( is_dir($test_root->path.DIRECTORY_SEPARATOR.$entry) && !preg_match('~^(\.|_vti)(.*)$~', $entry) ) {
 				$test_dirs[] = $entry;
 			}
 		}
@@ -241,7 +311,6 @@ class PhpSecInfo
 	 *
 	 */
 	function renderOutput($page_title="Security Information About PHP") {
-
 		/**
 		 * We need to use PhpSecInfo_Test::getBooleanIniValue() below
 		 * @see PhpSecInfo_Test::getBooleanIniValue()
@@ -249,193 +318,7 @@ class PhpSecInfo
 		if (!class_exists('PhpSecInfo_Test')) {
 			include( dirname(__FILE__).DIRECTORY_SEPARATOR.'Test'.DIRECTORY_SEPARATOR.'Test.php');
 		}
-
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title><?php echo $page_title ?></title>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta name="robots" content="noindex,nofollow" />
-	<style type="text/css">
-	.phpblue { #777BB4 }
-	/*
-	#706464
-	#C7C6B3
-	#7B8489
-	#646B70
-	*/
-
-	BODY {
-		background-color:#C7C6B3;
-		color: #333333;
-		margin: 0;
-		padding: 0;
-		text-align:center;
-	}
-
-	BODY, TD, TH, H1, H2 {
-		font-family: Helvetica, Arial, Sans-serif;
-	}
-
-	DIV.logo {
-		float:right;
-	}
-
-	A:link, A:hover, A:visited {
-		color: #000099;
-		text-decoration: none;
-	}
-
-	A:hover {
-		text-decoration: underline !important;
-	}
-
-	DIV.container {
-		text-align:center;
-		width:650px;
-		margin-left:auto;
-		margin-right:auto;
-	}
-
-	DIV.header {
-		width:100%;
-		text-align: left;
-		border-collapse: collapse;
-	}
-
-	DIV.header {
-		background-color:#4C5B74;
-		color:white;
-		border-bottom: 3px solid #333333;
-		padding:.5em;
-	}
-
-	DIV.header H1, DIV.header H2 {
-		padding:0;
-		margin: 0;
-	}
-
-	DIV.header H2 {
-		font-size: 0.9em;
-	}
-
-	DIV.header a:link, DIV.header a:visited, DIV.header a:hover {
-		color:#ffff99;
-	}
-
-	H2.result-header {
-		margin:1em 0 .5em 0;
-	}
-
-	TABLE.results {
-		border-collapse:collapse;
-		width:100%;
-		text-align: left;
-	}
-
-	TD, TH {
-		padding:0.5em;
-		border: 2px solid #333333;
-	}
-
-	TR.header {
-		background-color:#706464;
-		color:white;
-	}
-
-	TD.label {
-		text-align:top;
-		font-weight:bold;
-		background-color:#7B8489;
-		border:2px solid #333333;
-	}
-
-	TD.value {
-		border:2px solid #333333	}
-
-	.centered {
-		text-align: center;
-	}
-	.centered TABLE {
-		text-align: left;
-	}
-	.centered TH { text-align: center; }
-
-	.result { font-size:1.2em; font-weight:bold; margin-bottom:.5em;}
-
-	.message { line-height:1.4em; }
-
-	TABLE.values {
-		padding:.5em;
-		margin:.5em;
-		text-align:left;
-		margin:none;
-		width:90%;
-	}
-	TABLE.values TD {
-		font-size:.9em;
-		border:none;
-		padding:.4em;
-	}
-	TABLE.values TD.label {
-		font-weight:bold;
-		text-align:right;
-		width:40%;
-	}
-
-	DIV.moreinfo {
-		text-align:right;
-	}
-
-	.value-ok {background-color:#009900;color:#ffffff;}
-	.value-ok a:link, .value-ok a:hover, .value-ok a:visited {color:#FFFF99;font-weight:bold;background-color:transparent;text-decoration:none;}
-	.value-ok table td {background-color:#33AA33; color:#ffffff;}
-
-	.value-notice {background-color:#FFA500;color:#000000;}
-	.value-notice a:link, .value-notice a:hover, .value-notice a:visited {color:#000099;font-weight:bold;background-color:transparent;text-decoration:none;}
-	.value-notice td {background-color:#FFC933; color:#000000;}
-
-	.value-warn {background-color:#990000;color:#ffffff;}
-	.value-warn a:link, .value-warn a:hover, .value-warn a:visited {color:#FFFF99;font-weight:bold;background-color:transparent;text-decoration:none;}
-	.value-warn td {background-color:#AA3333; color:#ffffff;}
-
-	.value-notrun {background-color:#cccccc;color:#000000;}
-	.value-notrun a:link, .value-notrun a:hover, .value-notrun a:visited {color:#000099;font-weight:bold;background-color:transparent;text-decoration:none;}
-	.value-notrun td {background-color:#dddddd; color:#000000;}
-
-	.value-error {background-color:#F6AE15;color:#000000;font-weight:bold;}
-	.value-error td {background-color:#F6AE15; color:#000000;}
-
-
-
-	</style>
-
-</head>
-<body>
-	<div class="header">
-		<h1><?php echo $page_title ?></h1>
-		<h2>PhpSecInfo Version <?php echo PHPSECINFO_VERSION ?>; build <?php echo PHPSECINFO_BUILD ?> &middot; <a href="<?php echo PHPSECINFO_URL ?>">Project Homepage</a></h2>
-	</div>
-
-	<div class="container">
-
-
-		<?php
-			foreach ($this->test_results as $group_name=>$group_results) {
-				$this->_outputRenderTable($group_name, $group_results);
-			}
-
-			$this->_outputRenderNotRunTable();
-
-			$this->_outputRenderStatsTable();
-
-		?>
-
-	</div>
-</body>
-</html>
-		<?php
+		$this->loadView($this->_format);
 	}
 
 
@@ -455,51 +338,8 @@ class PhpSecInfo
 
 		ksort($group_results);
 
-		?>
-		<h2 class="result-header"><?php echo htmlspecialchars($group_name, ENT_QUOTES) ?></h2>
+		$this->loadView($this->_format.'/Result', array('group_name'=>$group_name, 'group_results'=>$group_results));
 
-		<table class="results">
-		<tr class="header">
-			<th>Test</th>
-			<th>Result</th>
-		</tr>
-		<?php foreach ($group_results as $test_name=>$test_results): ?>
-
-		<tr>
-			<td class="label"><?php echo htmlspecialchars($test_name, ENT_QUOTES) ?></td>
-			<td class="value <?php echo $this->_outputGetCssClassFromResult($test_results['result']) ?>">
-				<?php if ($group_name != 'Test Results Summary'): ?>
-					<div class="result"><?php echo $this->_outputGetResultTypeFromCode($test_results['result']) ?></div>
-				<?php endif; ?>
-				<div class="message"><?php echo $test_results['message'] ?></div>
-
-				<?php if ( isset($test_results['value_current'] ) || isset($test_results['value_recommended']) ): ?>
-					<table class="values">
-					<?php if (isset($test_results['value_current'])): ?>
-						<tr>
-							<td class="label">Current Value:</td>
-							<td><?php echo $test_results['value_current'] ?></td>
-						</tr>
-					<?php endif;?>
-					<?php if (isset($test_results['value_recommended'])): ?>
-						<tr>
-							<td class="label">Recommended Value:</td>
-							<td><?php echo $test_results['value_recommended'] ?></td>
-						</tr>
-					<?php endif; ?>
-					</table>
-				<?php endif; ?>
-
-				<?php if (isset($test_results['moreinfo_url']) && $test_results['moreinfo_url']): ?>
-					<div class="moreinfo"><a href="<?php echo $test_results['moreinfo_url']; ?>">More information &raquo;</a></div>
-				<?php endif; ?>
-			</td>
-		</tr>
-
-		<?php endforeach; ?>
-		</table><br />
-
-		<?php
 		return true;
 	}
 
@@ -516,10 +356,10 @@ class PhpSecInfo
 		foreach($this->result_counts as $code=>$val) {
 			if ($code != PHPSECINFO_TEST_RESULT_NOTRUN) {
 				$percentage = round($val/$this->num_tests_run * 100,2);
-
-				$stats[$this->_outputGetResultTypeFromCode($code)] = array( 'count' => $val,
-																'result' => $code,
-																'message' => "$val out of {$this->num_tests_run} ($percentage%)");
+				$result_type = $this->_outputGetResultTypeFromCode($code);
+				$stats[$result_type] = array( 'count' => $val,
+											'result' => $code,
+											'message' => "$val out of {$this->num_tests_run} ($percentage%)");
 			}
 		}
 
@@ -679,7 +519,59 @@ class PhpSecInfo
 	}
 
 
+	/**
+	 * A very, very simple "view" system
+	 *
+	 */
+	function loadView($view_name, $data=null) {
+		if ($data != null) {
+			extract($data);
+		}
 
+		$view_file = $this->getViewDirectory().$view_name.".php";
+
+		if ( file_exists($view_file) && is_readable($view_file) ) {
+			ob_start();
+			include $view_file;
+			echo ob_get_clean();
+		} else {
+			user_error("The view '{$view_file}' either does not exist or is not readable", E_USER_WARNING);
+		}
+
+
+	}
+
+
+	/**
+	 * Returns the current view directory
+	 *
+	 * @return string
+	 */
+	function getViewDirectory() {
+		return $this->_view_directory;
+	}
+
+
+	/**
+	 * Sets the directory that PHPSecInfo will look in for views
+	 *
+	 * @param string $newdir
+	 */
+	function setViewDirectory($newdir) {
+		$this->_view_directory = $newdir;
+	}
+
+
+
+
+	function getFormat() {
+		return $this->_format;
+	}
+
+
+	function setFormat($format) {
+		$this->_format = $format;
+	}
 
 }
 
