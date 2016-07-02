@@ -1,20 +1,60 @@
-html, body {color: black; background: white; margin: 0; padding: 40px;}
+html, body {
+    color: black;
+    background: white;
+    margin: 0;
+    padding: 40px;
+}
 
+a {
+    color: #666666;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: transparent;
+}
 
-a {color: #666666; text-decoration: none; font-weight: bold; background-color: transparent;}
-a:hover {color: #ff6600;}
+a:hover {
+    color: #ff6600;
+}
 
-h1 {}
-h2 {}
-h3 {margin:0px; }
-h4 {}
-h5 {}
+h1 {
+}
 
-form {margin: auto;}
+h2 {
+}
 
-.outer {border: 1px solid silver;}
-.head {padding: 5px; font-weight: bold;}
-.even {padding: 5px;}
-.odd {padding: 5px;}
-.foot {padding: 5px; font-weight: bold;}
+h3 {
+    margin: 0;
+}
+
+h4 {
+}
+
+h5 {
+}
+
+form {
+    margin: auto;
+}
+
+.outer {
+    border: 1px solid silver;
+}
+
+.head {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.even {
+    padding: 5px;
+}
+
+.odd {
+    padding: 5px;
+}
+
+.foot {
+    padding: 5px;
+    font-weight: bold;
+}
 

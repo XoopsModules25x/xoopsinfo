@@ -1,8 +1,8 @@
 <div class="bg1" style="margin:20px 100px; padding:5px; border:2px solid #FF0000; text-align:left; font-weight:bold;">
-Vous n'avez pas copié le fichier class/uploader.php se trouvant dans l'archive !!!
-<br /><br />
+Vous n'avez pas copiï¿½ le fichier class/uploader.php se trouvant dans l'archive !!!
+<br><br>
 <ul>
-<li>Désinstaller le module XoopsInfo</li>
+<li>Dï¿½sinstaller le module XoopsInfo</li>
 <li>Copier tous les fichiers se trouvants dans l'archive sur votre serveur</li>
 <li>Installer le module XoopsInfo</li>
 </div>

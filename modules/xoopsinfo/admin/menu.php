@@ -1,92 +1,123 @@
 <?php
 /**
-* XOOPS - PHP Content Management System
-* Copyright (c) 2001 - 2006 <http://www.xoops.org/>
-*
-* Module: xoopsinfo 2.0
-* Licence : GPL
-* Authors :
-*              - Jmorris
-*              - Marco
-*              - Christian
-*              - DuGris (http://www.dugris.info)
-*/
+ * XOOPS - PHP Content Management System
+ * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
+ *
+ * Module: xoopsinfo 2.0
+ * Licence : GPL
+ * Authors :
+ *              - Jmorris
+ *              - Marco
+ *              - Christian
+ *              - DuGris (http://www.dugris.info)
+ */
 
-if (!defined('XOOPS_ROOT_PATH')) { die('XOOPS root path not defined'); }
+if (!defined('XOOPS_ROOT_PATH')) {
+    die('XOOPS root path not defined');
+}
 
-include_once( XOOPS_ROOT_PATH . '/class/uploader.php');
+include_once(XOOPS_ROOT_PATH . '/class/uploader.php');
 
-include_once( XOOPS_ROOT_PATH . '/modules/xoopsinfo/include/functions.php');
+include_once(XOOPS_ROOT_PATH . '/modules/xoopsinfo/include/functions.php');
 $phpsysinfo_path = XoopsInfo_moduleoption('xi_phpsysinfo_folder');
 $phpsecinfo_path = XoopsInfo_moduleoption('xi_phpsecinfo_folder');
 
-$i=0;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU1;
-$adminmenu[$i]['link'] = 'admin/index.php';
+$moduleDirName = basename(dirname(__DIR__));
 
-$i++;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU2;
-$adminmenu[$i]['link'] = 'admin/php.php';
+$moduleHandler = xoops_getHandler('module');
+$module        = $moduleHandler->getByDirname($moduleDirName);
+$pathIcon32    = '../../' . $module->getInfo('sysicons32');
+$pathModIcon32 = './' . $module->getInfo('modicons32');
+xoops_loadLanguage('modinfo', $module->dirname());
 
-$i++;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU3;
-$adminmenu[$i]['link'] = 'admin/mysqlinfo.php';
+$xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
+include_once $xoopsModuleAdminPath . '/language/english/main.php';
 
-if ( !empty($phpsysinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsysinfo_path . '/index.php') ) {
-	if ( !defined("_PHPSYSINFO") ){
-		define('_PHPSYSINFO', 1);
-	}
-	$i++;
-	$adminmenu[$i]['title'] = _MI_XI_ADMENU8;
-	$adminmenu[$i]['link'] = 'admin/phpsysinfo.php';
-}
 
-if ( !empty($phpsecinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsecinfo_path . '/index.php') ) {
-	if ( !defined("_PHPSECINFO") ){
-		define('_PHPSECINFO', 1);
-	}
-	$i++;
-	$adminmenu[$i]['title'] = _MI_XI_ADMENU9;
-	$adminmenu[$i]['link'] = 'admin/phpsecinfo.php';
-}
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png'
+);
 
-$i++;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU4;
-$adminmenu[$i]['link'] = 'admin/modules.php';
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU1,
+    'link'  => 'admin/main.php',
+    'icon'  => $pathIcon32 . '/manage.png'
+);
 
-$i++;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU5;
-$adminmenu[$i]['link'] = 'admin/editors.php';
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU2,
+    'link'  => 'admin/php.php',
+    'icon'  => $pathIcon32 . '/administration.png'
+);
 
-$i++;
-$adminmenu[$i]['title'] = _MI_XI_ADMENU6;
-$adminmenu[$i]['link'] = 'admin/templates.php';
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU3,
+    'link'  => 'admin/mysqlinfo.php',
+    'icon'  => $pathIcon32 . '/list.png'
+);
 
-if ( defined("_XI_MIMETYPE") ) {
-	$i++;
-	$adminmenu[$i]['title'] = _MI_XI_ADMENU7;
-	$adminmenu[$i]['link'] = 'admin/mimetypes.php';
-}
 
-if (isset($xoopsModule)) {
-	$i = 0;
-	$headermenu[$i]['title'] = _AM_XI_GOTOHOMEPAGE;
-	$headermenu[$i]['link'] = XOOPS_URL . '/';
 
-	$i++;
-	$headermenu[$i]['title'] = _PREFERENCES;
-	$headermenu[$i]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');
+//if (!empty($phpsysinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsysinfo_path . '/index.php')) {
+//    if (!defined("_PHPSYSINFO")) {
+//        define('_PHPSYSINFO', 1);
+//    }
+    $adminmenu[] = array(
+        'title' => _MI_XI_ADMENU8,
+        'link'  => 'admin/phpsysinfo.php',
+        'icon'  => $pathIcon32 . '/faq.png'
+    );
+//}
 
-	$i++;
-	$headermenu[$i]['title'] = _MI_XI_HELP;
-	$headermenu[$i]['link'] = XOOPS_URL . '/modules/xoopsinfo/admin/help.php';
+//if (!empty($phpsecinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsecinfo_path . '/index.php')) {
+//    if (!defined("_PHPSECINFO")) {
+//        define('_PHPSECINFO', 1);
+//    }
+    $adminmenu[] = array(
+        'title' => _MI_XI_ADMENU9,
+        'link'  => 'admin/phpsecinfo.php',
+        'icon'  => $pathIcon32 . '/firewall.png'
+    );
+//}
 
-	$i++;
-	$headermenu[$i]['title'] = _MI_XI_UPDATE_MODULE;
-	$headermenu[$i]['link'] = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $xoopsModule->getVar('dirname');
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU4,
+    'link'  => 'admin/modules.php',
+    'icon'  => $pathIcon32 . '/exec.png'
+);
 
-	$i++;
-	$headermenu[$i]['title'] = _MI_XI_NEWVERSION;
-	$headermenu[$i]['link'] = XOOPS_URL . '/modules/xoopsinfo/admin/index.php?op=newversion';
-}
-?>
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU5,
+    'link'  => 'admin/editors.php',
+    'icon'  => $pathIcon32 . '/translations.png'
+);
+
+$adminmenu[] = array(
+    'title' => _MI_XI_ADMENU6,
+    'link'  => 'admin/templates.php',
+    'icon'  => $pathIcon32 . '/watermark.png'
+);
+
+
+//if (defined("_XI_MIMETYPE")) {
+    $adminmenu[] = array(
+        'title' => _MI_XI_ADMENU7,
+        'link'  => 'admin/mimetypes.php',
+        'icon'  => $pathIcon32 . '/type.png'
+    );
+//}
+
+//$adminmenu[] = array(
+//    'title' => _MI_XI_NEWVERSION,
+//    'link'  => 'admin/main.php?op=newversion',
+//    'icon'  => $pathIcon32 . '/update.png'
+//);
+
+
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png'
+);
