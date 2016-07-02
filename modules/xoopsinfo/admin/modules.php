@@ -25,7 +25,7 @@ echo $indexAdmin->addNavigation(basename(__FILE__));
 //    adminmenu(3);
 //}
 
-$module_handler =& xoops_getHandler('module');
+$module_handler = xoops_getHandler('module');
 $installed_mods = $module_handler->getObjects();
 
 echo '<table width="100%" class="outer">';
@@ -58,7 +58,7 @@ foreach ($installed_mods as $module) {
         $file = XOOPS_ROOT_PATH . '/modules/xoopsinfo/plugins/modules/' . $module->getVar('dirname') . '.php';
         if (file_exists($file)) {
             include_once($file);
-            if ($modversion['status_fileinfo']) {
+            if (isset($modversion['status_fileinfo'])) {
                 $new_version = @file_get_contents($modversion['status_fileinfo']);
             }
         }

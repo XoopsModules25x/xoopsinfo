@@ -127,7 +127,7 @@ function Template_GetModulesList()
 {
     global $mid, $theme, $status;
 
-    $module_handler =& xoops_getHandler('module');
+    $module_handler = xoops_getHandler('module');
     $criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
     $criteria->add(new Criteria('isactive', 1));
     $criteria->add(new Criteria('mid', 1), 'OR');
@@ -151,7 +151,7 @@ function Template_GetModulesList()
  */
 function &XoopsInfo_getModuleInfo($dirname = 'xoopsinfo')
 {
-    $hModule = &xoops_getHandler('module');
+    $hModule = xoops_getHandler('module');
     $Module  = $hModule->getByDirname($dirname);
 
     return $Module;
@@ -176,9 +176,9 @@ function XoopsInfo_moduleoption($option, $repmodule = 'xoopsinfo')
             $retval = $xoopsModuleConfig[$option];
         }
     } else {
-        $module_handler =& xoops_getHandler('module');
+        $module_handler = xoops_getHandler('module');
         $module         =& $module_handler->getByDirname($repmodule);
-        $config_handler =& xoops_getHandler('config');
+        $config_handler = xoops_getHandler('config');
         if ($module) {
             $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
             if (isset($moduleConfig[$option])) {
@@ -241,8 +241,9 @@ function filemtime_override($dirname, $template, $theme = '', $block = false)
             $filename = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/templates/' . $template;
         }
     }
-
-    return date(_DATESTRING, filemtime($filename));
+//if (false !== @filemtime($filename)) {
+    return date(_DATESTRING, @filemtime($filename));
+//}
 }
 
 function XoopsInfo_GetLastVersion()

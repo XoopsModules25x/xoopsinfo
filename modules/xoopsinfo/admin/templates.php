@@ -35,7 +35,7 @@ echo $indexAdmin->addNavigation(basename(__FILE__));
 //    adminmenu(5);
 //}
 
-$module_handler =& xoops_getHandler('module');
+$module_handler = xoops_getHandler('module');
 
 if ($mid > 0) {
     $modules[] = $module_handler->get($mid);

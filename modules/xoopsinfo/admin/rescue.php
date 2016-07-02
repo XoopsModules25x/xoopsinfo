@@ -44,7 +44,7 @@ $xoopsDB =& XoopsDatabaseFactory::getDatabaseConnection();
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 require_once XOOPS_ROOT_PATH . '/class/criteria.php';
 
-$config_handler =& xoops_getHandler('config');
+$config_handler = xoops_getHandler('config');
 $xoopsConfig    =& $config_handler->getConfigsByCat(XOOPS_CONF);
 // Xoops Include, require, ...
 
@@ -52,7 +52,7 @@ include('admin_header.php');
 
 // Old debug mode
 $isSystem       = XoopsInfo_getModuleInfo('system');
-$config_handler =& xoops_getHandler('config');
+$config_handler = xoops_getHandler('config');
 $xoopsConfig    =& $config_handler->getConfigsByCat(XOOPS_CONF);
 $old_debug_mode = $xoopsConfig['debug_mode'];
 $theme_set      = $xoopsConfig['theme_set'];
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql    = 'UPDATE ' . $xoopsDB->prefix('config') . ' SET conf_value="default" WHERE conf_name="theme_set" and conf_modid=0';
                 $result = $xoopsDB->queryF($sql);
 
-                $member_handler =& xoops_getHandler('member');
+                $member_handler = xoops_getHandler('member');
                 $member_handler->updateUsersByField('theme', 'default');
                 $_SESSION['xoopsUserTheme'] = 'default';
             }
