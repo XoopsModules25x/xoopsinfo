@@ -1,80 +1,156 @@
-<?php 
+<?php
+/**
+ * hwsensors sensor class
+ *
+ * PHP version 5
+ *
+ * @category  PHP
+ * @package   PSI_Sensor
+ * @author    Michael Cramer <BigMichi1@users.sourceforge.net>
+ * @copyright 2009 phpSysInfo
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU General Public License
+ * @version   SVN: $Id: class.hwsensors.inc.php 661 2012-08-27 11:26:39Z namiltd $
+ * @link      http://phpsysinfo.sourceforge.net
+ */
+ /**
+ * getting information from hwsensors
+ *
+ * @category  PHP
+ * @package   PSI_Sensor
+ * @author    Michael Cramer <BigMichi1@users.sourceforge.net>
+ * @copyright 2009 phpSysInfo
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU General Public License
+ * @version   Release: 3.0
+ * @link      http://phpsysinfo.sourceforge.net
+ */
+class HWSensors extends Sensors
+{
+    /**
+     * content to parse
+     *
+     * @var array
+     */
+    private $_lines = array();
 
-// phpSysInfo - A PHP System Information Script
-// http://phpsysinfo.sourceforge.net/
-
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-// $Id: class.hwsensors.inc.php,v 1.4 2006/05/20 17:01:07 bigmichi1 Exp $
-
-class mbinfo {
-    var $lines;
-
-    function mbinfo() {
-        $this->lines = execute_program('sysctl', '-w hw.sensors');
-	$this->lines = explode("\n", $this->lines);
+    /**
+     * fill the private content var through command
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $lines = "";
+//        CommonFunctions::executeProgram('sysctl', '-w hw.sensors', $lines);
+        CommonFunctions::executeProgram('sysctl', 'hw.sensors', $lines);
+        $this->_lines = preg_split("/\n/", $lines, -1, PREG_SPLIT_NO_EMPTY);
     }
 
-    function temperature() {
-	$ar_buf = array();
-	$results = array();
-
-        foreach( $this->lines as $line ) {
-    	    $ar_buf = preg_split("/[\s,]+/", $line);
-	    if( isset( $ar_buf[3] ) && $ar_buf[2] == 'temp') {
-    		$results[$j]['label'] = $ar_buf[1];
-    		$results[$j]['value'] = $ar_buf[3];
-    		$results[$j]['limit'] = '70.0';
-    		$results[$j]['percent'] = $results[$j]['value'] * 100 / $results[$j]['limit'];
-    		$j++;
-	    }
-	}
-	return $results;
+    /**
+     * get temperature information
+     *
+     * @return void
+     */
+    private function _temperature()
+    {
+        foreach ($this->_lines as $line) {
+            if (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+temp,\s+([0-9\.]+)\s+degC.*$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbTemp($dev);
+            } elseif (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+([0-9\.]+)\s+degC$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbTemp($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+degC\s+\((.*)\)$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[3]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbTemp($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+degC$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbTemp($dev);
+            }
+        }
     }
 
-    function fans() {
-	$ar_buf = array();
-	$results = array();
-
-	foreach( $this->lines as $line ) {
-	    $ar_buf = preg_split("/[\s,]+/", $line );
-	    if( isset( $ar_buf[3] ) && $ar_buf[2] == 'fanrpm') {
-    		$results[$j]['label'] = $ar_buf[1];
-    		$results[$j]['value'] = $ar_buf[3];
-    		$j++;
-    	    }
-	}
-	return $results;
+    /**
+     * get fan information
+     *
+     * @return void
+     */
+    private function _fans()
+    {
+        foreach ($this->_lines as $line) {
+            if (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+fanrpm,\s+([0-9\.]+)\s+RPM.*$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbFan($dev);
+            } elseif (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+([0-9\.]+)\s+RPM$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbFan($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+RPM\s+\((.*)\)$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[3]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbFan($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+RPM$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbFan($dev);
+            }
+        }
     }
 
-    function voltage() {
-	$ar_buf = array();
-	$results = array();
+    /**
+     * get voltage information
+     *
+     * @return void
+     */
+    private function _voltage()
+    {
+        foreach ($this->_lines as $line) {
+            if (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+volts_dc,\s+([0-9\.]+)\s+V.*$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbVolt($dev);
+            } elseif (preg_match('/^hw\.sensors\.[0-9]+=[^\s,]+,\s+([^,]+),\s+([0-9\.]+)\s+V\sDC$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbVolt($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+VDC\s+\((.*)\)$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[3]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbVolt($dev);
+            } elseif (preg_match('/^hw\.sensors\.[^\.]+\.(.*)=([0-9\.]+)\s+VDC$/', $line, $ar_buf)) {
+                $dev = new SensorDevice();
+                $dev->setName($ar_buf[1]);
+                $dev->setValue($ar_buf[2]);
+                $this->mbinfo->setMbVolt($dev);
+            }
+        }
+    }
 
-	foreach( $this->lines as $line ) {
-	    $ar_buf = preg_split("/[\s,]+/", $line );
-    	    if ( isset( $ar_buf[3] ) && $ar_buf[2] == 'volts_dc') {
-    		$results[$j]['label'] = $ar_buf[1];
-    		$results[$j]['value'] = $ar_buf[3];
-		$results[$j]['min'] = '0.00';
-    		$results[$j]['max'] = '0.00';
-    		$j++;
-    	    }
-	}
-	return $results;
+    /**
+     * get the information
+     *
+     * @see PSI_Interface_Sensor::build()
+     *
+     * @return Void
+     */
+    public function build()
+    {
+        $this->_temperature();
+        $this->_voltage();
+        $this->_fans();
     }
 }
-
-?>
