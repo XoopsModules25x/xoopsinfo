@@ -1,0 +1,19 @@
+/**
+*
+* Xoopsinfo : UPGRADE INSTRUCTIONS
+* 
+*/
+
+
+
+Here is the list of actions you will have to do to upgrade from any previous version :
+
+Caution : 
+For those who want to keep the classical mimetype's manager, 
+don't upload /class, /kernel and /language directory/files from the module's archive
+
+1) Upload all files in this package, overwriting the existing files.
+2) Update the module in system admin -> modules
+
+
+if you use modxoopsinfo 1.0 or 1.1, you can uninstal this one through module administration panel.

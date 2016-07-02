@@ -1,0 +1,39 @@
+/**
+*
+* Xoopsinfo : changelog
+* 
+*/
+
+V2.14
+- security patch released (PhpSecInfo et PhpSysInfo)
+
+V2.13
+- New "Security Information About PHP" area (http://phpsec.org/projects/phpsecinfo/index.html)
+- Update phpsysinfo 2.5.2 to 2.5.3 ( "System Informations" area (http://phpsysinfo.sourceforge.net/))
+- Plugin for class XoopsEditors
+- Debug rescue access
+
+V2.12
+- New "System Informations" area (http://phpsysinfo.sourceforge.net/) - phpsysinfo 2.5.2
+- New parameter (in the preferences of the module) : Referers authorized for xoopsinfo.php
+- Revamped xoopsinfo.php
+- Revamped "Sql Environnement" Area, add button optimize tables, repair tables, analyze tables and check tables
+- Revamped "Rescue" access
+
+V2.11
+- New "Overriding Infos" area
+
+V2.10
+- New "Mimetypes Management" area
+
+v2.0
+- Revamped "Xoops Environment" Area
+- Revamped "Sql Environnement" Area
+- New "Modules Infos" Area
+- New "Editor's Infos" Area
+- "Rescue" access
+
+
+V1.1 - baseline : XOOPS Info Module (JMorris & Christian & Marco)
+
+v1.0 - baseline : XOOPS Info Module (JMorris)
