@@ -44,7 +44,7 @@ class XoopsMimetypes extends XoopsObject {
 
 	// constructor
 	function xoopsmimetypes ($mime_id=null) {
-		$this->db =& Database::getInstance();
+		$this->db = Database::getInstance();
 		$this->initVar('mime_id',XOBJ_DTYPE_INT,0,true,11);
 		$this->initVar('mime_ext',XOBJ_DTYPE_TXTBOX,'',true,10);
 		$this->initVar('mime_types',XOBJ_DTYPE_TXTAREA,'',true,0);
@@ -370,7 +370,7 @@ class XoopsMimetypes_perms extends XoopsObject {
 
 	// constructor
 	function xoopsmimetypes_perms ($mperm_id=null) {
-		$this->db =& Database::getInstance();
+		$this->db = Database::getInstance();
 		$this->initVar('mperm_id',XOBJ_DTYPE_INT,0,true,10);
 		$this->initVar('mperm_mime',XOBJ_DTYPE_INT,0,true,11);
 		$this->initVar('mperm_module'  ,XOBJ_DTYPE_INT,0,true,5);
