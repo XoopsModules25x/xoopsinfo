@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 define('_AM_MODULE_ADMENU1', 'Vue g&eacute;n&eacute;rale syst&egrave;me');
 define('_AM_MODULE_ADMENU2', 'Informations d&eacute;taill&eacute;es');
 define('_AM_MODULE_ADMENU3', "Recevoir de l'aide");

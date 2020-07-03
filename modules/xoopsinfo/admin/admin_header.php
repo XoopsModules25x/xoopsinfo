@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -12,12 +15,10 @@
 /**
  * @copyright    XOOPS Project http://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
  * @since
  * @author       XOOPS Development Team
  */
-
-if (basename($_SERVER['PHP_SELF']) !== 'rescue.php') {
+if ('rescue.php' !== basename($_SERVER['PHP_SELF'])) {
     include '../../../include/cp_header.php';
 }
 define('XOOPSINFO_URL', XOOPS_URL . '/modules/xoopsinfo/');
@@ -61,10 +62,9 @@ include_once(XOOPS_ROOT_PATH . '/modules/xoopsinfo/admin/menu.php');
 
 $myts = MyTextSanitizer::getInstance();
 
-if (basename($_SERVER['PHP_SELF']) === 'index.php') {
+if ('index.php' === basename($_SERVER['PHP_SELF'])) {
     XoopsInfo_UpdatedModule();
 }
-
 
 //=========================================
 
@@ -86,6 +86,7 @@ require_once $xoopsModuleAdminPath . '/moduleadmin.php';
 $myts = MyTextSanitizer::getInstance();
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     include_once $GLOBALS['xoops']->path('class/template.php');
+
     $xoopsTpl = new XoopsTpl();
 }
 

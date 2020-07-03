@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,9 +14,8 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 global $xoops, $xoopsDB, $xoopsConfig, $xoopsModule;
-include('admin_header.php');
+include __DIR__ . '/admin_header.php';
 $phpsecinfo_path = XoopsInfo_moduleoption('xi_phpsecinfo_folder');
 xoops_cp_header();
 //adminmenu(4);

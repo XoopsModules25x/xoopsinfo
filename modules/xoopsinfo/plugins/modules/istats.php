@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,10 +14,9 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 switch ($xoopsConfig['language']) {
     case 'english':
-    default :
+    default:
         $modversion['developer_website_url']  = '';
         $modversion['developer_website_name'] = '';
 
@@ -30,8 +32,8 @@ switch ($xoopsConfig['language']) {
 
         $modversion['support_site_url']  = '';
         $modversion['support_site_name'] = '';
-        break;
 
+        break;
     case 'french':
         $modversion['developer_website_url']  = '';
         $modversion['developer_website_name'] = '';
@@ -48,5 +50,6 @@ switch ($xoopsConfig['language']) {
 
         $modversion['support_site_url']  = '';
         $modversion['support_site_name'] = '';
+
         break;
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 global $xoopsDB, $xoopsConfig, $xoopsModule;
 include('admin_header.php');
 xoops_cp_header();
@@ -50,14 +52,19 @@ echo '</tr>';
 
 foreach ($installed_mods as $module) {
     unset($modversion);
+
     @include(XOOPS_ROOT_PATH . '/modules/' . $module->getVar('dirname') . '/xoops_version.php');
 
-    $action      = 0;
+    $action = 0;
+
     $new_version = false;
+
     if (!array_key_exists('status_fileinfo', $modversion)) {
         $file = XOOPS_ROOT_PATH . '/modules/xoopsinfo/plugins/modules/' . $module->getVar('dirname') . '.php';
+
         if (file_exists($file)) {
             include_once($file);
+
             if (isset($modversion['status_fileinfo'])) {
                 $new_version = @file_get_contents($modversion['status_fileinfo']);
             }
@@ -68,33 +75,46 @@ foreach ($installed_mods as $module) {
         }
     }
 
-    if ($modversion['version'] != ($module->getVar('version') / 100)) {
+    if ($modversion['version'] != $module->getVar('version') / 100) {
         $action = 1;
-        $class  = '';
-        $style  = ' style="background : #ffa9a9;"';
+
+        $class = '';
+
+        $style = ' style="background : #ffa9a9;"';
     } elseif ($modversion['version'] == ($module->getVar('version') / 100) && ($modversion['version'] < $new_version && $new_version)) {
         $action = 2;
-        $class  = '';
-        $style  = ' style="background : #b5d1fe;"';
+
+        $class = '';
+
+        $style = ' style="background : #b5d1fe;"';
     } elseif ($modversion['version'] == ($module->getVar('version') / 100) && ($modversion['version'] == $new_version && $new_version)) {
         $action = 3;
-        $class  = 'odd';
-        $style  = '';
+
+        $class = 'odd';
+
+        $style = '';
     } else {
         $action = 0;
-        $class  = 'odd';
-        $style  = '';
+
+        $class = 'odd';
+
+        $style = '';
     }
 
     echo '<tr>';
+
     echo '<td class="' . $class . '"' . $style . '>';
-    if (array_key_exists('developer_website_url', $modversion) && $modversion['developer_website_url'] != '') {
+
+    if (array_key_exists('developer_website_url', $modversion) && '' != $modversion['developer_website_url']) {
         echo '<a target="_new" href="' . $modversion['developer_website_url'] . '">';
     }
+
     echo $module->getVar('name', 'E');
-    if (array_key_exists('developer_website_url', $modversion) && $modversion['developer_website_url'] != '') {
+
+    if (array_key_exists('developer_website_url', $modversion) && '' != $modversion['developer_website_url']) {
         echo '</a>';
     }
+
     echo '</td>';
 
     echo '<td class="' . $class . '"' . $style . ' align="center">';
@@ -103,10 +123,12 @@ foreach ($installed_mods as $module) {
 			<img src="../images/icons/update.gif" alt="' . _AM_XI_MODULE_UPDATE . '"align="absmiddle" />
 			</a>&nbsp;';
 
-    if ($action == 2 || $action == 0) {
-        if (array_key_exists('download_website', $modversion) && $modversion['download_website'] != '') {
+    if (2 == $action || 0 == $action) {
+        if (array_key_exists('download_website', $modversion) && '' != $modversion['download_website']) {
             echo '<a target="_blank" href="' . $modversion['download_website'] . '">';
+
             echo '<img src="../images/icons/download.gif" alt="' . _AM_XI_MODULE_DOWNLOAD . '"align="absmiddle" />';
+
             echo '</a>';
         } else {
             echo '<img src="../images/blank.png" alt="" width="22" height="22" />';
@@ -114,63 +136,85 @@ foreach ($installed_mods as $module) {
     } else {
         echo '<img src="../images/blank.png" alt="" width="22" height="22" />';
     }
+
     echo '</td>';
 
     echo '<td class="' . $class . '"' . $style . ' align="center">';
-    if (array_key_exists('support_site_url', $modversion) && $modversion['support_site_url'] != '') {
+
+    if (array_key_exists('support_site_url', $modversion) && '' != $modversion['support_site_url']) {
         echo '<a target="_blank" href="' . $modversion['support_site_url'] . '">';
+
         echo '<img src="../images/icons/forum.gif" alt="' . _AM_XI_MODULE_FORUM . '"/>';
+
         echo '</a>&nbsp;';
     } else {
         echo '<img src="../images/blank.png" alt="" width="20" height="20"/>&nbsp;';
     }
-    if (array_key_exists('submit_feature', $modversion) && $modversion['submit_feature'] != '') {
+
+    if (array_key_exists('submit_feature', $modversion) && '' != $modversion['submit_feature']) {
         echo '<a target="_blank" href="' . $modversion['submit_feature'] . '">';
+
         echo '<img src="../images/icons/feature.gif" alt="' . _AM_XI_MODULE_FEATURE . '"/>';
+
         echo '</a>&nbsp;';
     } else {
         echo '<img src="../images/blank.png" alt="" width="20" height="20"/>&nbsp;';
     }
-    if (array_key_exists('submit_bug', $modversion) && $modversion['submit_bug'] != '') {
+
+    if (array_key_exists('submit_bug', $modversion) && '' != $modversion['submit_bug']) {
         echo '<a target="_blank" href="' . $modversion['submit_bug'] . '">';
+
         echo '<img src="../images/icons/bugs.gif" alt="' . _AM_XI_MODULE_BUG . '"/>';
+
         echo '</a>';
     } else {
         echo '<img src="../images/blank.png" alt="" width="20" height="20"/>';
     }
+
     echo '</td>';
 
     echo '<td class="' . $class . '"' . $style . ' align="center">';
-    if ($action == 1) {
+
+    if (1 == $action) {
         echo '<b>';
     }
 
-    echo number_format($modversion['version'], 2);
-    if ($action == 1) {
+    echo number_format((float)$modversion['version'], 2);
+
+    if (1 == $action) {
         echo '</b>';
     }
+
     echo '</td>';
 
     echo '<td class="' . $class . '"' . $style . ' align="center">';
-    if ($action == 1) {
+
+    if (1 == $action) {
         echo '<b>';
     }
+
     echo number_format($module->getVar('version') / 100, 2);
-    if ($action == 1) {
+
+    if (1 == $action) {
         echo '</b>';
     }
+
     echo '</td>';
 
     echo '<td class="' . $class . '"' . $style . ' align="center">';
+
     if ($new_version) {
-        if ($action == 2) {
+        if (2 == $action) {
             echo '<b>';
         }
+
         echo number_format($new_version, 2);
-        if ($action == 2) {
+
+        if (2 == $action) {
             echo '</b>';
         }
     }
+
     echo '</td>';
 
     echo '</tr>';

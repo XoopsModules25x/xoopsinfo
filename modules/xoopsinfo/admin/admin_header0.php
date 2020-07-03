@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,8 +14,7 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
-if (basename($_SERVER['PHP_SELF']) !== 'rescue.php') {
+if ('rescue.php' !== basename($_SERVER['PHP_SELF'])) {
     include '../../../include/cp_header.php';
 }
 define('XOOPSINFO_URL', XOOPS_URL . '/modules/xoopsinfo/');
@@ -56,6 +58,6 @@ include_once(XOOPS_ROOT_PATH . '/modules/xoopsinfo/admin/menu.php');
 
 $myts = MyTextSanitizer::getInstance();
 
-if (basename($_SERVER['PHP_SELF']) === 'index.php') {
+if ('index.php' === basename($_SERVER['PHP_SELF'])) {
     XoopsInfo_UpdatedModule();
 }

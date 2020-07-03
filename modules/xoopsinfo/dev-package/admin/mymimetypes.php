@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -8,7 +11,6 @@
  * Authors :
  *            - DuGris (http://www.dugris.info)
  */
-
 include_once('../../../mainfile.php');
 include_once('../../../include/cp_header.php');
 include_once('../../../include/functions.php');
