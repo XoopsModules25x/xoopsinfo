@@ -1,3 +1,26 @@
+3.02  2020-07-10 (mambax7)
+- PHP7 updates/cosmetics
+
+################################################
+#     v3.0.1 2019-2020 - Version Zer00CooL     #
+################################################
+# Version basée sur la v0.2.1 + Version v2.0.2 #
+################################################
+Intégration du français par défaut dans le fichier PhpSecInfo.php par switch case. Si le français n'est pas présent l'anglais est affiché.
+Intégration du français par défaut dans le fichier Test.php. Si le français n'est pas présent l'anglais est affiché.
+Intégration des correctifs de BigDeej
+Ajout du fichier .gitattributes pour la collaboration Linux / Windows.
+Ajout d'une fin de ligne vide à la fin de chaque fichier.
+Indentation des fichiers aux normes PSR-2.
+Ajout du fichier phpinfo() et un lien de retour vers PhpSecInfo.
+
+# # # # # # # # # # # # # # # # # # #
+###### A inclure SecurityInfo ! ######
+Basé sur la v0.2.2, quelques modifications ont été effectuées.
+https://github.com/matomo-org/plugin-SecurityInfo/blob/master/PhpSecInfo/PhpSecInfo.php#L20
+
+# # # # # # # # # # # # # # # # # #
+###### A inclure la v0.2.2 ! ######
 v0.2.2
 - requires are now resolved relative to base phpsecinfo path, so PhpSecInfo does
   not need to be in php's include path
@@ -10,7 +33,34 @@ v0.2.2
 - PHPSecInfo_Test::getUnixId() now handles failure better and tries alternate
   methods before giving up
 - Minor CSS fixes in HTML view <Thomas Corbiere>
+######
 
+#################################################
+###### A été inclus v2.0.2 (Dec 5, 2016) ! ######
+#################################################
+- Updated PHP Version Test (OK)
+- Added PHP7 Support for Version Test (OK)
+
+################################################
+###### A été inclus v2.0.1a (Dec 1, 2015) ######
+################################################
+# Removed PHP4 Support (Si il s'agit du test Curl, je ne l'ai pas supprimé.) (NO)
+# Removed Container: PhpSecInfo_Test_Core_CURL (NO)
+# Removed Test: PhpSecInfo_Test_Core_CURL_File_Support (NO)
+
+- Updated to PHP5 Objects with public value (OK)
+- Change "Build" format from YYYYMMDD to YYYY.MM.DD for easier human readable format (PhpSecInfo.php) (OK)
+- New Test: PhpSecInfo_Test_Core_Version <Glenn S Crystal> (OK)
+- Updated Test: PhpSecInfo_Test_Core_Memory_Limit - 8MB is far too low for 2016 default memory limit should be below 200MB today (OK)
+- Updated Test: PhpSecInfo_Test_Core_Upload_Max_Filesize - 1024*256 Bytes is far too low for 2016 default max upload should be at most 32MB (OK)
+- Updated Test: PhpSecInfo_Test_Core_Post_Max_Size - 1024*256 Bytes is far too low for 2016 default max upload should be at most 32MB (OK)
+
+- Added output (HTML) template support (Where ? Fixed URL in Test.php ? ) (THEN OK)
+- Upgraded output (HTML) to Bootstrap 2.0 (Where ? Docs with PHPDocumentor ?) (THEN OK)
+
+##############################################################
+# La version de base utilisée pour inclure les modifications #
+##############################################################
 v0.2.1
 - uid and gid tests now correctly test the user and group that PHP is executing as
   (requires that exec() or posix functions are enabled)
@@ -49,8 +99,6 @@ v0.2.0
 - Fixed NOTICE for undefined string offset in returnBytes when input is 0
 - Fixed NOTICE for undefined offset in table output where $test_results['moreinfo_url']
   is not set
-
-
 
 v0.1.2
 - Code is now licensed under "New BSD" license.  See LICENSE
