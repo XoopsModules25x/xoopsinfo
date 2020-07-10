@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 $modversion['developer_website_url']  = 'http://dev.xoops.org/';
 $modversion['developer_website_name'] = 'Official XOOPS Development Site - Developing the future...';
 
@@ -25,7 +27,7 @@ $modversion['submit_feature'] = 'http://sourceforge.net/tracker/?group_id=41586&
 
 switch ($xoopsConfig['language']) {
     case 'english':
-    default :
+    default:
         $modversion['download_website'] = 'http://www.xoops.org/modules/core/';
 
         $modversion['demo_site_url']  = 'http://www.xoops.org';
@@ -33,8 +35,8 @@ switch ($xoopsConfig['language']) {
 
         $modversion['support_site_url']  = 'http://www.xoops.org/modules/newbb/';
         $modversion['support_site_name'] = 'Official XOOPS Website - Support Forums';
-        break;
 
+        break;
     case 'french':
         $modversion['download_website'] = 'http://www.frxoops.org/modules/noyau/';
 
@@ -43,5 +45,6 @@ switch ($xoopsConfig['language']) {
 
         $modversion['support_site_url']  = 'http://www.frxoops.org/modules/newbb/';
         $modversion['support_site_name'] = 'XOOPS France (Communaut� francophone) - Forums';
+
         break;
 }

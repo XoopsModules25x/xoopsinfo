@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 global $xoopsDB, $xoopsConfig, $xoopsModule;
 include('admin_header.php');
 xoops_cp_header();
@@ -31,9 +33,12 @@ $path = XOOPSINFO_PATH . 'plugins/editors/';
 $d    = dir($path);
 while (false !== ($entry = $d->read())) {
     $file = $path . $entry;
-    if ($entry !== '.' && $entry !== '..' && basename($file) !== 'index.html') {
+
+    if ('.' !== $entry && '..' !== $entry && 'index.html' !== basename($file)) {
         include_once($file);
+
         $editors[] = $editor;
+
         unset($editor);
     }
 }
@@ -54,13 +59,16 @@ echo '</tr>';
 
 foreach ($editors as $key => $editor) {
     $isModule = false;
+
     if ($editor['dirname']) {
         $isModule = XoopsInfo_getModuleInfo($editor['dirname']);
     }
+
     echo '<tr>';
 
     // Check editor class file
     echo '<td class="even" align="center">';
+
     if ($editor['class'] && is_readable(XOOPS_ROOT_PATH . $editor['class']) && $isModule) {
         echo '<img src="../images/icons/on.gif" alt="' . _AM_XI_EDITOR_OK . '"align="absmiddle" />';
     } elseif ($editor['class'] && is_readable(XOOPS_ROOT_PATH . $editor['class']) && $editor['dirname'] && !$isModule) {
@@ -72,18 +80,24 @@ foreach ($editors as $key => $editor) {
     } else {
         echo '<img src="../images/icons/on.gif" alt="' . _AM_XI_EDITOR_OK . '"align="absmiddle" />';
     }
+
     echo '</td>';
 
     // Editor's name
     echo '<td class="odd">';
+
     if ($editor['project']) {
         echo '<a target="_blank" href="' . $editor['project'] . '">';
     }
+
     echo $editor['name'];
+
     if ($editor['project']) {
         echo '</a>';
     }
+
     echo '<br>' . $editor['class'] . '</td>';
+
     echo '</tr>';
 }
 echo '</table>';

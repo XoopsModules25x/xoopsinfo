@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -82,7 +85,8 @@ define('_MI_XI_REFERER_DSC', "s�par� par <font color='#CC0000'><b>|</b></fon
 define('_MI_XI_ADMENU8', 'Information syst�me');
 
 define('_MI_PHPSYSINFO_FOLDER', "[PHPSYSINFO] Dossier contenant <font color='#CC0000'>PHPSYSINFO</font>");
-define('_MI_PHPSYSINFO_FOLDER_DSC', "par exemple <font color='#CC0000'><b>/phpsysinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
+define('_MI_PHPSYSINFO_FOLDER_DSC',
+       "par exemple <font color='#CC0000'><b>/phpsysinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
 
 define('_MI_PHPSYSINFO_LANG', '[PHPSYSINFO] Langue par d�faut');
 define('_MI_PHPSYSINFO_LANG_DSC', 'La liste des langues est disponibles dans le dossier includes/lang/ de phpsysinfo');
@@ -97,4 +101,5 @@ define('_MI_XI_XOOPS_SESSION_TABLE', 'Optimiser la table session');
 define('_MI_XI_ADMENU9', 'PHP Information de s�curit�');
 
 define('_MI_PHPSECINFO_FOLDER', "[PHPSECINFO] Dossier contenant <font color='#CC0000'>PHPSECINFO</font>");
-define('_MI_PHPSECINFO_FOLDER_DSC', "par exemple <font color='#CC0000'><b>/phpsecinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");
+define('_MI_PHPSECINFO_FOLDER_DSC',
+       "par exemple <font color='#CC0000'><b>/phpsecinfo</b></font>, sans le <font color='#CC0000'><b>/</font></b> final<br>Plus d'informations sur <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");

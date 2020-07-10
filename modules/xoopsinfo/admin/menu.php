@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
@@ -33,80 +35,76 @@ xoops_loadLanguage('modinfo', $module->dirname());
 $xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
 include_once $xoopsModuleAdminPath . '/language/english/main.php';
 
-
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_HOME,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png'
-);
+    'icon'  => $pathIcon32 . '/home.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU1,
     'link'  => 'admin/main.php',
-    'icon'  => $pathIcon32 . '/manage.png'
-);
+    'icon'  => $pathIcon32 . '/manage.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU2,
     'link'  => 'admin/php.php',
-    'icon'  => $pathIcon32 . '/administration.png'
-);
+    'icon'  => $pathIcon32 . '/administration.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU3,
     'link'  => 'admin/mysqlinfo.php',
-    'icon'  => $pathIcon32 . '/list.png'
-);
-
-
+    'icon'  => $pathIcon32 . '/list.png',
+];
 
 //if (!empty($phpsysinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsysinfo_path . '/index.php')) {
 //    if (!defined("_PHPSYSINFO")) {
 //        define('_PHPSYSINFO', 1);
 //    }
-    $adminmenu[] = array(
-        'title' => _MI_XI_ADMENU8,
-        'link'  => 'admin/phpsysinfo.php',
-        'icon'  => $pathIcon32 . '/faq.png'
-    );
+$adminmenu[] = [
+    'title' => _MI_XI_ADMENU8,
+    'link'  => 'admin/phpsysinfo.php',
+    'icon'  => $pathIcon32 . '/faq.png',
+];
 //}
 
 //if (!empty($phpsecinfo_path) && file_exists(XOOPS_ROOT_PATH . $phpsecinfo_path . '/index.php')) {
 //    if (!defined("_PHPSECINFO")) {
 //        define('_PHPSECINFO', 1);
 //    }
-    $adminmenu[] = array(
-        'title' => _MI_XI_ADMENU9,
-        'link'  => 'admin/phpsecinfo.php',
-        'icon'  => $pathIcon32 . '/firewall.png'
-    );
+$adminmenu[] = [
+    'title' => _MI_XI_ADMENU9,
+    'link'  => 'admin/phpsecinfo.php',
+    'icon'  => $pathIcon32 . '/firewall.png',
+];
 //}
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU4,
     'link'  => 'admin/modules.php',
-    'icon'  => $pathIcon32 . '/exec.png'
-);
+    'icon'  => $pathIcon32 . '/exec.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU5,
     'link'  => 'admin/editors.php',
-    'icon'  => $pathIcon32 . '/translations.png'
-);
+    'icon'  => $pathIcon32 . '/translations.png',
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_XI_ADMENU6,
     'link'  => 'admin/templates.php',
-    'icon'  => $pathIcon32 . '/watermark.png'
-);
-
+    'icon'  => $pathIcon32 . '/watermark.png',
+];
 
 //if (defined("_XI_MIMETYPE")) {
-    $adminmenu[] = array(
-        'title' => _MI_XI_ADMENU7,
-        'link'  => 'admin/mimetypes.php',
-        'icon'  => $pathIcon32 . '/type.png'
-    );
+$adminmenu[] = [
+    'title' => _MI_XI_ADMENU7,
+    'link'  => 'admin/mimetypes.php',
+    'icon'  => $pathIcon32 . '/type.png',
+];
 //}
 
 //$adminmenu[] = array(
@@ -115,9 +113,8 @@ $adminmenu[] = array(
 //    'icon'  => $pathIcon32 . '/update.png'
 //);
 
-
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
-);
+    'icon'  => $pathIcon32 . '/about.png',
+];

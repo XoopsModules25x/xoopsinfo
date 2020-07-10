@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -15,9 +18,8 @@
 define('_MI_XI_NAME', 'XOOPS Info');
 
 define('_MI_XI_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_XI_HELP_HEADER', __DIR__.'/help/helpheader.html');
-define('_MI_XI_BACK_2_ADMIN','Back to Administration of ');
-
+define('_MI_XI_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_XI_BACK_2_ADMIN', 'Back to Administration of ');
 
 // A brief description of this module
 define('_MI_XI_DESC', 'Basic module for displaying XOOPS, Apache, MySQL, and PHP information.');
@@ -87,7 +89,8 @@ define('_MI_XI_REFERER_DSC', "separated by <font color='#CC0000'><b>|</b></font>
 define('_MI_XI_ADMENU8', 'System info');
 
 define('_MI_PHPSYSINFO_FOLDER', "[PHPSYSINFO] Folder containing <font color='#CC0000'>PHPSYSINFO</font>");
-define('_MI_PHPSYSINFO_FOLDER_DSC', "For example <font color='#CC0000'><b>/phpsysinfo</b></font>, without the final <font color='#CC0000'><b>/</font></b><br>More information on <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
+define('_MI_PHPSYSINFO_FOLDER_DSC',
+       "For example <font color='#CC0000'><b>/phpsysinfo</b></font>, without the final <font color='#CC0000'><b>/</font></b><br>More information on <a target='_blank' href='http://phpsysinfo.sourceforge.net/'>phpsysinfo</a>");
 
 define('_MI_PHPSYSINFO_LANG', '[PHPSYSINFO] Language by default');
 define('_MI_PHPSYSINFO_LANG_DSC', 'The languages list is available in the file includes/lang of phpsysinfo');
@@ -102,4 +105,5 @@ define('_MI_XI_XOOPS_SESSION_TABLE', 'Optimize session table');
 define('_MI_XI_ADMENU9', 'PHP Security Information');
 
 define('_MI_PHPSECINFO_FOLDER', "[PHPSECINFO] Folder containing <font color='#CC0000'>PHPSECINFO</font>");
-define('_MI_PHPSECINFO_FOLDER_DSC', "For example <font color='#CC0000'><b>/phpsecinfo</b></font>, without the final <font color='#CC0000'><b>/</font></b><br>More information on <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");
+define('_MI_PHPSECINFO_FOLDER_DSC',
+       "For example <font color='#CC0000'><b>/phpsecinfo</b></font>, without the final <font color='#CC0000'><b>/</font></b><br>More information on <a target='_blank' href='http://phpsec.org/projects/phpsecinfo/index.html'>PHP Security Consortium: PHPSecInfo</a>");

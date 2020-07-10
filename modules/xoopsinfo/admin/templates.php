@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 global $xoopsDB, $xoopsConfig, $xoopsModule;
 include('admin_header.php');
 include_once(XOOPS_ROOT_PATH . '/class/xoopsformloader.php');
@@ -20,7 +22,7 @@ global $xoopsConfig;
 
 $mid    = isset($_REQUEST['mid']) ? (int)$_REQUEST['mid'] : 1;
 $status = isset($_REQUEST['status']) ? (int)$_REQUEST['status'] : 0;
-$theme  = isset($_REQUEST['theme']) ? $_REQUEST['theme'] : $xoopsConfig['theme_set'];
+$theme  = $_REQUEST['theme'] ?? $xoopsConfig['theme_set'];
 
 xoops_cp_header();
 $indexAdmin = new ModuleAdmin();
@@ -51,9 +53,11 @@ require_once(XOOPS_ROOT_PATH . '/class/xoopslists.php');
 $dirlist = XoopsLists::getThemesList();
 if (!empty($dirlist)) {
     asort($dirlist);
+
     foreach ($dirlist as $value) {
         $theme_select->addOption('templates.php?mid=' . $mid . '&status=' . $status . '&theme=' . $value, $value);
     }
+
     $theme_select->setValue('templates.php?mid=' . $mid . '&status=' . $status . '&theme=' . $theme);
 }
 
@@ -93,89 +97,128 @@ echo '</tr>';
 
 foreach ($modules as $module) {
     unset($modversion);
+
     @include(XOOPS_ROOT_PATH . '/modules/' . $module->getVar('dirname') . '/xoops_version.php');
+
     $templates = $module->getInfo('templates');
-    $blocks    = $module->getInfo('blocks');
+
+    $blocks = $module->getInfo('blocks');
 
     if ($templates || $blocks) {
         echo '<tr>';
+
         echo '<td class="odd">';
-        if (array_key_exists('developer_website_url', $modversion) && $modversion['developer_website_url'] != '') {
+
+        if (array_key_exists('developer_website_url', $modversion) && '' != $modversion['developer_website_url']) {
             echo '<a target="_new" href="' . $modversion['developer_website_url'] . '">';
         }
+
         echo $module->getVar('name', 'E');
-        if (array_key_exists('developer_website_url', $modversion) && $modversion['developer_website_url'] != '') {
+
+        if (array_key_exists('developer_website_url', $modversion) && '' != $modversion['developer_website_url']) {
             echo '</a>';
         }
+
         echo '</td>';
 
         echo '<td width="40%" class="odd" align="left" valign="top">';
+
         if ($templates) {
             echo '<table width="300px">';
+
             foreach ($templates as $tpl) {
-                $img      = '';
+                $img = '';
+
                 $override = check_override($module->getInfo('dirname'), $tpl['file'], $theme);
+
                 $fileinfo = filemtime_override($module->getInfo('dirname'), $tpl['file'], $theme);
-                if ($status == 0 && $override) {
+
+                if (0 == $status && $override) {
                     $title = _AM_XI_TPL_OVERRIDE_ON . ' - ' . $fileinfo;
-                    $img   = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
-                } elseif ($status == 0 && !$override) {
+
+                    $img = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
+                } elseif (0 == $status && !$override) {
                     $title = _AM_XI_TPL_OVERRIDE_OFF . ' - ' . $fileinfo;
-                    $img   = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
-                } elseif ($status == 1 && $override) {
+
+                    $img = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
+                } elseif (1 == $status && $override) {
                     $title = _AM_XI_TPL_OVERRIDE_OFF . ' - ' . $fileinfo;
-                    $img   = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
-                } elseif ($status == 2 && !$override) {
+
+                    $img = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
+                } elseif (2 == $status && !$override) {
                     $title = _AM_XI_TPL_OVERRIDE_OFF . ' - ' . $fileinfo;
-                    $img   = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
+
+                    $img = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
                 }
 
-                if ($img != '') {
+                if ('' != $img) {
                     echo '<tr>';
+
                     echo '<td align="left">';
+
                     echo '<a href="#" title="' . $title . '">' . $img . ' ' . $tpl['file'] . '</a>';
+
                     echo '</td>';
+
                     echo '</tr>';
                 }
             }
+
             echo '</table>';
         }
+
         echo '</td>';
 
         echo '<td width="40%" class="odd" align="left" valign="top">';
+
         if ($blocks) {
             echo '<table width="300px">';
+
             foreach ($blocks as $block) {
                 if (isset($block['template'])) {
-                    $img      = '';
+                    $img = '';
+
                     $override = check_override($module->getInfo('dirname'), $block['template'], $theme, true);
+
                     $fileinfo = filemtime_override($module->getInfo('dirname'), $block['template'], $theme, true);
-                    if ($status == 0 && $override) {
+
+                    if (0 == $status && $override) {
                         $title = _AM_XI_TPL_OVERRIDE_ON . ' - ' . $fileinfo;
-                        $img   = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
-                    } elseif ($status == 0 && !$override) {
+
+                        $img = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
+                    } elseif (0 == $status && !$override) {
                         $title = _AM_XI_TPL_OVERRIDE_OFF . ' - ' . $fileinfo;
-                        $img   = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
-                    } elseif ($status == 1 && $override) {
+
+                        $img = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
+                    } elseif (1 == $status && $override) {
                         $title = _AM_XI_TPL_OVERRIDE_ON . ' - ' . $fileinfo;
-                        $img   = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
-                    } elseif ($status == 2 && !$override) {
+
+                        $img = '<img src="../images/icons/override_on.gif" align="absmiddle" />';
+                    } elseif (2 == $status && !$override) {
                         $title = _AM_XI_TPL_OVERRIDE_OFF . ' - ' . $fileinfo;
-                        $img   = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
+
+                        $img = '<img src="../images/icons/override_off.gif" align="absmiddle" />';
                     }
 
-                    if ($img != '') {
+                    if ('' != $img) {
                         echo '<tr>';
+
                         echo '<td align="left">';
+
                         echo '<a href="#" title="' . $title . '">' . $img . ' ' . $block['template'] . '</a>';
+
                         echo '</td>';
+
                         echo '</tr>';
                     }
                 }
             }
+
             echo '</table>';
         }
+
         echo '</td>';
+
         echo '</tr>';
     }
 }

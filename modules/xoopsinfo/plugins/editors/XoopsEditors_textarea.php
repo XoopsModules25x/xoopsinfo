@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 $editor['name']    = 'XoopsEditors Framework - textarea';
 $editor['class']   = '/class/xoopseditor/textarea/textarea.php';
 $editor['dirname'] = '';

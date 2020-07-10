@@ -1,28 +1,59 @@
-<?php require_once('PhpSecInfo/PhpSecInfo.php'); ?>
+<?php declare(strict_types=1);
+
+require_once __DIR__ . '/PhpSecInfo/PhpSecInfo.php'; ?>
 <?php phpsecinfo(); ?>
 
 <?php
-/**
+/* ## EN ##
+ * ## EN ## This is an example page calling the phpsecinfo() function
+ *
  * If you want to capture output and/or customize the look and feel,
  * you need to do slightly more work.
  *
- * Example:
+ * Example :
  * <code>
  * require_once('PhpSecInfo/PhpSecInfo.php');
- * // instantiate the class
+ * // Instantiate the class :
  * $psi = new PhpSecInfo();
  *
- * // load and run all tests
+ * // Load and run all tests :
  * $psi->loadAndRun();
  *
- * // grab the results as a multidimensional array
+ * // Grab the results as a multidimensional array :
  * $results = $psi->getResultsAsArray();
  * echo "<pre>"; echo print_r($results, true); echo "</pre>";
  *
- * // grab the standard results output as a string
+ * // Grab the standard results output as a string :
  * $html = $psi->getOutput();
  *
- * // send it to the browser
+ * // Send it to the browser :
+ * echo $html;
+ * </code>
+ *
+ *
+ * ## FR ##
+ * ## FR ## Ceci est un exemple de page appelant la fonction phpsecinfo()
+ *
+ * Si vous souhaitez capturer la sortie et/ou personnaliser l'apparence,
+ * vous devez faire un peu plus de travail.
+ *
+ * Exemple :
+ * <code>
+ * require_once('PhpSecInfo/PhpSecInfo.php');
+ * // Instancie la classe :
+ * $psi = new PhpSecInfo();
+ *
+ * // Charge et exécute tous les tests :
+ * $psi->loadAndRun();
+ *
+ * // Récupère les résultats sous forme de tableau multidimensionnel :
+ * $results = $psi->getResultsAsArray();
+ * echo "<pre>"; echo print_r($results, true); echo "</pre>";
+ *
+ * // Récupère les résultats standard sous forme de chaîne :
+ * $html = $psi->getOutput();
+ *
+ * // L'envoyer au navigateur :
  * echo $html;
  * </code>
  */

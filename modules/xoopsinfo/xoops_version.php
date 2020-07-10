@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -12,37 +15,31 @@
  *            - DuGris (http://www.dugris.info)
  */
 
-$modversion['name']        = _MI_XI_NAME;
-$modversion['version']     = 2.15;
-$modversion['description'] = _MI_XI_DESC;
-$modversion['author']      = _MI_XI_AUTHOR;
-$modversion['credits']     = _MI_XI_CREDITS;
+$modversion['version']       = 2.20;
+$modversion['module_status'] = 'Alpha 1';
+$modversion['release_date']  = '2020/08/10';
+$modversion['name']          = _MI_XI_NAME;
+$modversion['description']   = _MI_XI_DESC;
+$modversion['author']        = _MI_XI_AUTHOR;
+$modversion['credits']       = _MI_XI_CREDITS;
 //$modversion['help']        = _MI_XI_SUPPORT;
-$modversion['help']        = 'page=help';
-$modversion['license']     = 'GNU GPL 2.0 or later';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']    = 1;
-$modversion['image']       = 'images/xoopsinfo_slogo.png';
-$modversion['dirname']     = 'xoopsinfo';
-
-$modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses/moduleadmin';
-$modversion['sysicons16']     = 'Frameworks/moduleclasses/icons/16';
-$modversion['sysicons32']     = 'Frameworks/moduleclasses/icons/32';
-$modversion['modicons16']     = 'assets/images/icons/16';
-$modversion['modicons32']     = 'assets/images/icons/32';
-
-//about
-$modversion['module_status']       = 'Beta 1';
-$modversion['release_date']        = '2016/07/01';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0 or later';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 1;
+$modversion['image']               = 'images/logoModule.png';
+$modversion['dirname']             = 'xoopsinfo';
+$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses/moduleadmin';
+$modversion['sysicons16']          = 'Frameworks/moduleclasses/icons/16';
+$modversion['sysicons32']          = 'Frameworks/moduleclasses/icons/32';
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
+$modversion['min_php']             = '7.1';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array(
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7');
-
+$modversion['min_db']              = ['mysql' => '5.5'];
 // XoopsInfo
 $modversion['developer_website_url']  = 'http://www.dugris.info/';
 $modversion['developer_website_name'] = 'DuGris Website';
@@ -100,7 +97,11 @@ $modversion['config'][$i]['description'] = '';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '3';
-$modversion['config'][$i]['options']     = array(3 => '3', 4 => '4', 5 => '5');
+$modversion['config'][$i]['options']     = [
+    3 => '3',
+    4 => '4',
+    5 => '5'
+];
 
 $i++;
 $modversion['config'][$i]['name']        = 'xi_img_background';
@@ -182,5 +183,5 @@ $modversion['config'][$i]['formtype']    = 'text';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = '/phpsecinfo';
 
-if (!empty($_POST['fct']) && !empty($_POST['op']) && $_POST['fct'] === 'modulesadmin' && $_POST['op'] === 'update_ok' && $_POST['dirname'] == $modversion['dirname']) {
+if (!empty($_POST['fct']) && !empty($_POST['op']) && 'modulesadmin' === $_POST['fct'] && 'update_ok' === $_POST['op'] && $_POST['dirname'] == $modversion['dirname']) {
 }

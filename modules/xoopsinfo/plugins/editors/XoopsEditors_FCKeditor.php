@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * XOOPS - PHP Content Management System
  * Copyright (c) 2001 - 2006 <http://www.xoops.org/>
@@ -11,7 +14,6 @@
  *              - Christian
  *              - DuGris (http://www.dugris.info)
  */
-
 $editor['name']    = 'XoopsEditors Framework - FCKeditor';
 $editor['class']   = '/class/xoopseditor/FCKeditor/fckeditor.php';
 $editor['dirname'] = '';
