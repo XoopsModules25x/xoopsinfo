@@ -15,9 +15,9 @@ declare(strict_types=1);
  *            - DuGris (http://www.dugris.info)
  */
 
-$modversion['version']       = 2.15;
-$modversion['module_status'] = 'Beta 2';
-$modversion['release_date']  = '2020/07/01';
+$modversion['version']       = 2.20;
+$modversion['module_status'] = 'Alpha 1';
+$modversion['release_date']  = '2020/08/10';
 $modversion['name']          = _MI_XI_NAME;
 $modversion['description']   = _MI_XI_DESC;
 $modversion['author']        = _MI_XI_AUTHOR;
